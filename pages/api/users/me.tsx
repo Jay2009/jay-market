@@ -3,20 +3,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
 import client from "@libs/server/client";
 import { Token } from "@prisma/client";
-
-declare module "iron-session" {
-  interface IronSessionData {
-    user?: {
-      id: number;
-    };
-  }
-}
+import { withApiSession } from "@libs/server/withSession";
 
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  console.log(req.session.user);
   const profile = await client.user.findUnique({
     where: { id: req.session.user?.id },
   });
@@ -26,8 +18,10 @@ async function handler(
   });
 }
 
-export default withIronSessionApiRoute(withHandler("GET", handler), {
-  cookieName: "carrotsession",
-  password:
-    "13256421564dsfksdlkfjlkdfjlskdfjlksdfjlkajflkdjflkdsfjlkejlksdjdfklj15231",
-});
+export default withApiSession(
+  withHandler({
+    method: "GET",
+    handler,
+    isPrivate: true,
+  })
+);
