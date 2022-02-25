@@ -79,7 +79,7 @@ export default function Layout({
               <span>Home</span>
             </a>
           </Link>
-          <Link href="community">
+          <Link href="/community">
             <a
               className={cls(
                 "flex flex-col items-center space-y-2 ",
@@ -105,7 +105,7 @@ export default function Layout({
               <span>SNS</span>
             </a>
           </Link>
-          <Link href="chats">
+          <Link href="/chats">
             <a
               className={cls(
                 "flex flex-col items-center space-y-2 ",
@@ -131,7 +131,7 @@ export default function Layout({
               <span>Chat</span>
             </a>
           </Link>
-          <Link href="streams">
+          <Link href="/streams">
             <a
               className={cls(
                 "flex flex-col items-center space-y-2 ",
@@ -157,7 +157,7 @@ export default function Layout({
               <span>Live</span>
             </a>
           </Link>
-          <Link href="profile">
+          <Link href="/profile">
             <a
               className={cls(
                 "flex flex-col items-center space-y-2 ",
