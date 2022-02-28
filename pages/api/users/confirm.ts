@@ -1,18 +1,17 @@
-import { withIronSessionApiRoute } from "iron-session/next";
 import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
 import client from "@libs/server/client";
-import { Token } from "@prisma/client";
 import { withApiSession } from "@libs/server/withSession";
 
 async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  console.log(req.session);
   const { token } = req.body;
   const foundToken = await client.token.findUnique({
-    where: { payload: token },
+    where: {
+      payload: token,
+    },
   });
   if (!foundToken) return res.status(404).end();
   req.session.user = {
@@ -24,8 +23,9 @@ async function handler(
       userId: foundToken.userId,
     },
   });
-
   res.json({ ok: true });
 }
 
-export default withHandler({ methods: ["POST"], handler, isPrivate: false });
+export default withApiSession(
+  withHandler({ methods: ["POST"], handler, isPrivate: false })
+);

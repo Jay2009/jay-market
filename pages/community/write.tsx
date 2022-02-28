@@ -7,7 +7,7 @@ import useMutation from "@libs/client/useMutation";
 import { useEffect } from "react";
 import { Post } from "@prisma/client";
 import { useRouter } from "next/router";
-import useCoords from "@libs/client/useCoods";
+import useCoords from "@libs/client/useCoords";
 
 interface WriteForm {
   question: string;

@@ -4,7 +4,7 @@ import FloatingButton from "@components/floating-button";
 import Layout from "@components/layout";
 import useSWR from "swr";
 import { Post, User } from "@prisma/client";
-import useCoords from "@libs/client/useCoods";
+import useCoords from "@libs/client/useCoords";
 
 interface PostWithUser extends Post {
   user: User;
